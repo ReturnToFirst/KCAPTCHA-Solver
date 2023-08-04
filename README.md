@@ -37,6 +37,7 @@ Simple [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YOLOv8](http
     ```
 
 ### Inference
+Pretrained checkpoint available in this [link](https://drive.google.com/file/d/1gHC4RCRvNwGrm1xBXms110l9YOqM_M7e/view?usp=drive_link).
 1. Inference KCAPTCHA with below command
     ```
     python3 inference.py --model-path <checkpoint path> \
