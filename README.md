@@ -27,13 +27,13 @@ Simple [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YOLOv8](http
 
 2. Train YOLO with below command
     ```
-    python3 yolov8_train.py
+    python3 train.py
     ```
 
     There is also options for training. You can get option by this command.
 
     ```
-    python3 yolov8_train.py --help
+    python3 train.py --help
     ```
 
 ### Inference
