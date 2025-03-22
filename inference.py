@@ -3,7 +3,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--model-path", type=str, default="./captcha_solver/train/best.pt", help='Checkpoint path to use', dest='path')
+parser.add_argument("--model-path", type=str, default="best.pt", help='Checkpoint path to use', dest='path')
 parser.add_argument("--input-file", type=str, help="KCAPTCHA image file to read", dest='img_input')
 
 args = parser.parse_args()
