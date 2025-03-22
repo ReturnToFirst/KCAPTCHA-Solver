@@ -23,13 +23,13 @@ def letterbox(img, new_shape):
 
     return img, (top, left)
 
-def preprocess(input_img, new_shape):
+def preprocess(input_img, new_shape, dtype):
     img = cv2.cvtColor(input_img, cv2.COLOR_BGR2RGB)
     img, pad = letterbox(img, new_shape)
 
     image_data = np.array(img) / 255.0
     image_data = np.transpose(image_data, (2, 0, 1))
-    image_data = np.expand_dims(image_data, axis=0).astype(np.float32)
+    image_data = np.expand_dims(image_data, axis=0).astype(dtype)
 
     return image_data, pad
 
@@ -70,6 +70,21 @@ def postprocess(output, pad, confidence_thres, iou_thres):
         detected_classes.append(int(class_ids[i]))
     return detected_classes
 
+onnx_to_numpy_type = {
+    "tensor(float)": np.float32,
+    "tensor(float16)": np.float16,
+    "tensor(double)": np.float64,
+    "tensor(int8)": np.int8,
+    "tensor(uint8)": np.uint8,
+    "tensor(int16)": np.int16,
+    "tensor(uint16)": np.uint16,
+    "tensor(int32)": np.int32,
+    "tensor(uint32)": np.uint32,
+    "tensor(int64)": np.int64,
+    "tensor(uint64)": np.uint64,
+    "tensor(bool)": np.bool_,
+}
+
 
 classes = {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}
 
@@ -88,12 +103,13 @@ if __name__ == "__main__":
     session = ort.InferenceSession(onnx_model, providers=["CPUExecutionProvider"])
 
     model_inputs = session.get_inputs()
+    model_dtype = onnx_to_numpy_type.get(model_inputs[0].type, float)
     input_shape = model_inputs[0].shape
     input_width = input_shape[2]
     input_height = input_shape[3]
 
     img = cv2.imread(img_path)
-    img_data, pad = preprocess(img, [input_width, input_height])
+    img_data, pad = preprocess(img, [input_width, input_height], model_dtype)
 
     outputs = session.run(None, {model_inputs[0].name: img_data})
 
