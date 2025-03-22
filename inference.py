@@ -3,14 +3,14 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--model-path", type=str, default="best.pt", help='Checkpoint path to use', dest='path')
-parser.add_argument("--input-file", type=str, help="KCAPTCHA image file to read", dest='img_input')
+parser.add_argument("--model-path", type=str, default="best.pt", help='Checkpoint path to use', dest='model')
+parser.add_argument("--input-file", type=str, help="KCAPTCHA image file to read", dest='input')
 
 args = parser.parse_args()
 
-model = YOLO(args.path)
+model = YOLO(args.model)
 
-results = model(args.img_input)
+results = model(args.input)
 result = results[0]
 pred_res = result.boxes.data
 
