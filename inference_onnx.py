@@ -88,14 +88,13 @@ if __name__ == "__main__":
     session = ort.InferenceSession(onnx_model, providers=["CPUExecutionProvider"])
 
     model_inputs = session.get_inputs()
-    img = cv2.imread(img_path)
-
     input_shape = model_inputs[0].shape
     input_width = input_shape[2]
     input_height = input_shape[3]
 
+    img = cv2.imread(img_path)
     img_data, pad = preprocess(img, [input_width, input_height])
 
     outputs = session.run(None, {model_inputs[0].name: img_data})
 
-    print(postprocess(outputs, pad, args.c_thres, args.iou_thres))
+    print("".join(map(lambda x: str(x), postprocess(outputs, pad, args.c_thres, args.iou_thres))))
