@@ -54,14 +54,12 @@ def postprocess(output, pad, confidence_thres, iou_thres):
 
             x, y, w, h = outputs[i][0], outputs[i][1], outputs[i][2], outputs[i][3]
 
-            left = x - w
+            left = x - w / 2
             top = y - h / 2
-            width = w
-            height = h
 
             class_ids.append(class_id)
             scores.append(max_score)
-            boxes.append([left, top, width, height])
+            boxes.append([left, top, w, h])
 
     indices = cv2.dnn.NMSBoxes(boxes, scores, confidence_thres, iou_thres)
     indices.sort()
