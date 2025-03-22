@@ -40,6 +40,6 @@ Simple [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YOLOv8](http
 Pretrained checkpoint available in this [huggingface](https://huggingface.co/UselessNerd/YOLO-V8-S-KCAPTCHA).
 1. Inference KCAPTCHA with below command
     ```
-    python3 inference.py --model-path <checkpoint path> \
-                         --input-file <CAPTCHA image path>
+    python3 inference.py --model <checkpoint path> \
+                         --input <CAPTCHA image path>
     ```
