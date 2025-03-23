@@ -43,3 +43,18 @@ Pretrained checkpoint available in this [huggingface](https://huggingface.co/Use
     python3 inference.py --model <checkpoint path> \
                          --input <CAPTCHA image path>
     ```
+
+### Onnx export
+1. Export model to onnx with below command
+    ```
+    python3 export_to_onnx.py --input <model path>
+    ```
+#### Quantizaion
+1. Prepare kcaptcha dataset(for best, prepare different dataset that doesn't used on training)
+2. Export Quantized model with below command
+    ```python3 python3 export_to_onnx.py \
+    --input <input yolo model path> \
+    --output <output onnx model path> \
+    --quantize \
+    --calibration-dataset <calibration dataset path>
+    ```
