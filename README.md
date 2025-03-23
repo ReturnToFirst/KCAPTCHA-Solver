@@ -37,12 +37,13 @@ Simple [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YOLOv8](http
     ```
 
 ### Inference
-Pretrained checkpoint available in this [huggingface](https://huggingface.co/UselessNerd/YOLO-V8-S-KCAPTCHA).
+Pretrained checkpoint available in [huggingface](https://huggingface.co/UselessNerd/YOLO-V8-S-KCAPTCHA).
 1. Inference KCAPTCHA with below command
     ```
     python3 inference.py --model <checkpoint path> \
                          --input <CAPTCHA image path>
     ```
+On test, Model's benchmark accuracy is 97.6%
 
 ### Onnx export
 1. Export model to onnx with below command
