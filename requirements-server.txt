@@ -2,3 +2,4 @@ onnxruntime
 opencv-python-headless
 fastapi[standard]
 uvicorn
+python-multipart
