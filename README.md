@@ -58,3 +58,9 @@ Pretrained checkpoint available in this [huggingface](https://huggingface.co/Use
     --quantize \
     --calibration-dataset <calibration dataset path>
     ```
+
+### Server
+1. Start inference server with below command
+    ```
+    python3 main.py --model <onnx model path> \
+    ```
