@@ -1,0 +1,5 @@
+ultralyics
+onnx
+onnxsim
+onnxruntime
+opencv-python-headless
