@@ -37,20 +37,15 @@ class YOLODataReader(CalibrationDataReader):
     def rewind(self):
         self.enum_data = None
 
-# Load the YOLO8 model
-model = YOLO("best.pt")
 
-# Export the model to ONNX format
-model.export(format="onnx")
-
-quant_pre_process("best.onnx", "best_pre.onnx")
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_model", required=True, help="input model")
-    parser.add_argument("--output_model", required=True, help="output model")
+    parser.add_argument("--input", required=True, help="input yolov8 torch model")
+    parser.add_argument("--output", default="kcaptcha_yolo_int8.onnx", help="output onnx model path for quantized model", type=str)
+    parser.add_argument("--quantize", action="store_true", help="flag for quantize onnx model. Require --calibration-dataset and --quant-format")
     parser.add_argument(
-        "--calibrate_dataset", default="./calibration_dataset", help="calibration data set"
+        "--calibration-dataset", default="./calibration_dataset", help="calibration data set path"
     )
     parser.add_argument(
         "--quant_format",
@@ -63,27 +58,37 @@ def get_args():
     return args
 
 
-def main():
-    args = get_args()
-    input_model_path = args.input_model
-    output_model_path = args.output_model
-    calibration_dataset_path = args.calibrate_dataset
-    dr = YOLODataReader(
-        calibration_dataset_path, input_model_path
-    )
-
-    # Calibrate and quantize model
-    # Turn off model optimization during quantization
-    quantize_static(
-        input_model_path,
-        output_model_path,
-        dr,
-        quant_format=args.quant_format,
-        per_channel=args.per_channel,
-        weight_type=QuantType.QInt8,
-    )
-    print("Calibrated and quantized model saved.")
-
 
 if __name__ == "__main__":
-    main()
+    args = get_args()
+    # Load the YOLO8 model
+    model = YOLO(args.input)
+
+    # Export the model to ONNX format
+    model.export(format="onnx")
+    print("Onnx model saved.")
+    if args.quantize:
+        print("Start Calibration/Quanti")
+        output_model_path = args.output
+
+        file_name = os.path.splitext(os.path.split(args.input)[1])[0]
+        preprocessed_model = f"{file_name}_infer.onnx"
+
+        quant_pre_process(f"{file_name}.onnx", preprocessed_model)
+        print("Quantization model preprocessing done.")
+
+        dr = YOLODataReader(
+            args.calibration_dataset, preprocessed_model
+        )
+        # Calibrate and quantize model
+        # Turn off model optimization during quantization
+        print("Start quantization")
+        quantize_static(
+            preprocessed_model,
+            output_model_path,
+            dr,
+            quant_format=args.quant_format,
+            per_channel=args.per_channel,
+            weight_type=QuantType.QInt8,
+        )
+        print("Calibrated and quantized model saved.")
