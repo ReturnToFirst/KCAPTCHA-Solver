@@ -1,13 +1,15 @@
-from ultralytics import YOLO
 import onnxruntime as ort
-from onnxruntime.quantization.shape_inference import quant_pre_process
-from onnxruntime.quantization import CalibrationDataReader
-from onnxruntime.quantization import QuantFormat, QuantType, quantize_static
-from server import utils
 import glob
 import argparse
 import os
 import cv2
+import utils
+from ultralytics import YOLO
+from onnxruntime.quantization.shape_inference import quant_pre_process
+from onnxruntime.quantization import CalibrationDataReader
+from onnxruntime.quantization import QuantFormat, QuantType, quantize_static
+
+
 
 class YOLODataReader(CalibrationDataReader):
     def __init__(self, calibration_image_folder: str, model_path: str):
