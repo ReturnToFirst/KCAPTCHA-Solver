@@ -62,10 +62,10 @@ def postprocess(output, pad, confidence_thres, iou_thres):
             boxes.append([left, top, w, h])
 
     indices = cv2.dnn.NMSBoxes(boxes, scores, confidence_thres, iou_thres)
-    indices.sort()
+    detections = [(boxes[i][0], int(class_ids[i])) for i in indices]
+    detections.sort(key=lambda x: x[0])
 
-    for i in indices:
-        detected_classes.append(int(class_ids[i]))
+    detected_classes = [class_id for _, class_id in detections]
     return detected_classes
 
 onnx_to_numpy_type = {
