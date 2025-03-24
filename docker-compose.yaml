@@ -8,9 +8,11 @@ services:
       - MODEL_FILE_NAME=best_int8.onnx
       - SERVER_HOST=0.0.0.0 # Optional
       - SERVER_PORT=8000 # Optional
+      - YOLO_LABEL_FILE=/labels.yaml
       - YOLO_CONFIDENCE_THRESHOLD=0.5 # Optional
       - YOLO_IOU_THRESHOLD=0.5 # Optional
     ports:
       - "8000:8000"
     volumes:
       - ./model:/model
+      - ./labels.yaml:/labels.yaml

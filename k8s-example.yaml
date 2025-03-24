@@ -23,6 +23,8 @@ spec:
               value: "0.0.0.0"
             - name: SERVER_PORT # Optional
               value: 8000
+            - name: YOLO_LABEL_FILE
+              value : /labels.yaml # Change if model tranined for other labels or use ConfigMap
             - name: YOLO_CONFIDENCE_THRESHOLD # Optional
               value: 0.5
             - name: YOLO_IOU_THRESHOLD # Optional
@@ -30,13 +32,19 @@ spec:
           volumeMounts:
             - name: model-volume
               mountPath: /model
+            - name: label-file
+              mountPath: /labels.yaml
+              subPath: labels.yaml
+              readOnly: true
           ports:
             - containerPort: 8000
       volumes:
         - name: model-volume
           hostPath:
             path: /absolute-path-to-model
-            
+        - name: label-file
+          mountPath: /absolute-path-to-labels.yaml # or Use ConfigMap
+
 ---
 apiVersion: v1
 kind: Service
