@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  kcaptcha-solver:
+    build:
+    context: .  # Assumes the Dockerfile is in the same directory as this compose file
+    dockerfile: Dockerfile
+    restart: always
+    environment:
+      - MODEL_FILE_NAME=best_int8.onnx
+    ports:
+      - "8000:8000"
+    volumes:
+      - /k8s/kcaptcha/model:/model
