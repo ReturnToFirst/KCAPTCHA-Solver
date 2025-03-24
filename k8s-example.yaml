@@ -19,6 +19,14 @@ spec:
           env:
             - name: MODEL_FILE_NAME
               value: "best_int8.onnx"
+            - name: SERVER_HOST # Optional
+              value: "0.0.0.0"
+            - name: SERVER_PORT # Optional
+              value: 8000
+            - name: YOLO_CONFIDENCE_THRESHOLD # Optional
+              value: 0.5
+            - name: YOLO_IOU_THRESHOLD # Optional
+              value: 0.5
           volumeMounts:
             - name: model-volume
               mountPath: /model
@@ -28,7 +36,7 @@ spec:
         - name: model-volume
           hostPath:
             path: /absolute-path-to-model
-
+            
 ---
 apiVersion: v1
 kind: Service
