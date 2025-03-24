@@ -1,5 +1,14 @@
 import cv2
 import numpy as np
+import json
+import yaml
+
+def load_labels(path):
+    with open(path) as yaml_read:
+        return yaml.load(yaml_read, Loader=yaml.FullLoader)
+
+def cls_id_to_label(labels, cls_id):
+    return labels.get(cls_id, "")
 
 def letterbox(img, new_shape):
     shape = img.shape[:2]

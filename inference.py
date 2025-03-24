@@ -5,6 +5,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("--model", type=str, default="best.pt", help='Checkpoint path to use')
 parser.add_argument("--input", type=str, help="KCAPTCHA image file to read")
+parser.add_argument("--label", type=str, default="labels.yaml", help="classID-to-Label mapped yaml path")
 
 args = parser.parse_args()
 
