@@ -8,6 +8,8 @@ import utils
 
 parser = argparse.ArgumentParser()
 
+parser.add_argument("--host", type=str, default="0.0.0.0", help="Server host")
+parser.add_argument("--port", type=int, default=8000, help="Server port")
 parser.add_argument("--model", type=str, default="best.onnx", help='Checkpoint path to use', dest='model')
 parser.add_argument("--c_thres", type=float, default=0.5, help="Confidence threshold for filtering detections.", dest='c_thres')
 parser.add_argument("--iou_thres", type=float, default=0.5, help="IoU threshold for non-maximum suppression.", dest='iou_thres')
@@ -38,4 +40,4 @@ async def solve_kcaptcha(file: UploadFile):
     return {"solve": "".join(map(lambda x: str(x), utils.postprocess(outputs, pad, args.c_thres, args.iou_thres)))}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0")
+    uvicorn.run(app, host=args.host, port=args.port)
