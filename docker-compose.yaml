@@ -9,4 +9,4 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - /k8s/kcaptcha/model:/model
+      - ./model:/model
