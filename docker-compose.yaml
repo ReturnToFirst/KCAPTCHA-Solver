@@ -2,9 +2,7 @@ version: '3.8'
 
 services:
   kcaptcha-solver:
-    build:
-    context: .  # Assumes the Dockerfile is in the same directory as this compose file
-    dockerfile: Dockerfile
+    image: ghcr.io/returntofirst/kcaptcha-solver:latest
     restart: always
     environment:
       - MODEL_FILE_NAME=best_int8.onnx
