@@ -76,7 +76,7 @@ default exposed port is `8000`
 
 ### Docker
 
-### Docker run
+#### Docker run
 ```bash
 docker run -d --restart always \
   -e MODEL_FILE_NAME=best_int8.onnx \
@@ -91,3 +91,6 @@ deploy model file on ~/.model and run this command.
 Use [docker-compose.yaml](docker-compose.yaml) to deploy with docker-compose.
 
 deploy model file on ./model and run this command.
+
+#### Kubenetes
+Use [k8s-example.yaml](k8s-example.yaml) to deploy with kubectl.
