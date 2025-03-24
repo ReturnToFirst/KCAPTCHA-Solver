@@ -7,7 +7,7 @@ Simple Numerical [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YO
 
 1. Install requirements with below command
     ```bash
-    pip3 install -r requirement.txt
+    pip3 install -r requirements.txt
     ```
 
 2. Generate KCAPTCHA dataset
@@ -109,23 +109,27 @@ Pretrained checkpoint available in [huggingface](https://huggingface.co/UselessN
 Only `ONNX` format weight accepted by server for performance reason.
 Quantized model(`best_int8.onnx`) is highly recommanded.
 
-### Local inference
-Start inference server with below command.
 default exposed port is `8000`
 
+### Local inference
 
-```bash
-usage: main.py [-h] [--host HOST] [--port PORT] [--model MODEL] [--label LABEL] [--c_thres C_THRES] [--iou_thres IOU_THRES]
+1. Install requirements with below command
+    ```bash
+    pip3 install -r requirements-server.txt
+    ```
+2. Start inference server with below command.
+    ```bash
+    usage: main.py [-h] [--host HOST] [--port PORT] [--model MODEL] [--label LABEL] [--c_thres C_THRES] [--iou_thres IOU_THRES]
 
-options:
--h, --help            show this help message and exit
---host HOST           Server host
---port PORT           Server port
---model MODEL         Checkpoint path to use
---label LABEL         classID-to-Label mapped yaml path
---c_thres C_THRES     Confidence threshold for filtering detections.
---iou_thres IOU_THRES IoU threshold for non-maximum suppression.
-```
+    options:
+    -h, --help            show this help message and exit
+    --host HOST           Server host
+    --port PORT           Server port
+    --model MODEL         Checkpoint path to use
+    --label LABEL         classID-to-Label mapped yaml path
+    --c_thres C_THRES     Confidence threshold for filtering detections.
+    --iou_thres IOU_THRES IoU threshold for non-maximum suppression.
+    ```
 
 ### Docker
 
