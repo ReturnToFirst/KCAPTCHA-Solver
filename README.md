@@ -1,17 +1,13 @@
 # KCAPTCHA-Solver
-Simple [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YOLOv8](https://github.com/ultralytics/ultralytics)
-
-## Requirements
-
-- [ultralytics](https://pypi.org/project/ultralytics/)
+Simple Numerical [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YOLOv8](https://github.com/ultralytics/ultralytics)
 
 ## Usage
 
 ### Training
 
 1. Install requirements with below command
-    ```
-    pip3 install ultralytics
+    ```bash
+    pip3 install -r requirement
     ```
 
 2. Generate KCAPTCHA dataset
