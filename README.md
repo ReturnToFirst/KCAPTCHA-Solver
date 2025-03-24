@@ -63,8 +63,13 @@ On test, Model's benchmark accuracy is 97.6%
 
 ### Server
 1. Start inference server with below command
-    ```
-    python3 main.py --model <onnx model path> \
+    ```bash
+    python3 main.py \
+        --model <onnx model path> \
+        --host 0.0.0.0 \
+        --port 8000 \
+        --c_thres 0.5 \
+        --iou_thres 0.5
     ```
 
 default exposed port is `8000`
