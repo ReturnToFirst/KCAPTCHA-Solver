@@ -12,4 +12,4 @@ RUN pip3 install -r requirements-server.txt
 
 EXPOSE 8000
 ENTRYPOINT ["sh", "-c"]
-CMD ["python main.py --model /model/${MODEL_FILE_NAME} --host ${SERVER_HOST} --port ${SERVER_PORT}"]
+CMD ["python main.py --model /model/${MODEL_FILE_NAME} --host ${SERVER_HOST} --port ${SERVER_PORT} --c_thres ${YOLO_CONFIDENCE_THRESHOLD} --iou_thres ${YOLO_IOU_THRESHOLD}"]
