@@ -66,7 +66,7 @@ if __name__ == "__main__":
     model.export(format="onnx")
     print("Onnx model saved.")
     if args.quantize:
-        print("Start Calibration/Quanti")
+        print("Start Calibration/Quantization")
         output_model_path = args.output
 
         file_name = os.path.splitext(os.path.split(args.input)[1])[0]
