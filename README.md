@@ -53,11 +53,12 @@ On test, Model's benchmark accuracy is 97.6%
 #### Quantizaion
 1. Prepare kcaptcha dataset(for best, prepare different dataset that doesn't used on training)
 2. Export Quantized model with below command
-    ```python3 python3 export_to_onnx.py \
-    --input <input yolo model path> \
-    --output <output onnx model path> \
-    --quantize \
-    --calibration-dataset <calibration dataset path>
+    ```python3
+    python3 export_to_onnx.py \
+        --input <input yolo model path> \
+        --output <output onnx model path> \
+        --quantize \
+        --calibration-dataset <calibration dataset path>
     ```
 
 ### Server
