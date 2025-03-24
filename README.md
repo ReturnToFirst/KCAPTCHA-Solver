@@ -38,6 +38,7 @@ Simple [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YOLOv8](http
 
 ### Inference
 Pretrained checkpoint available in [huggingface](https://huggingface.co/UselessNerd/YOLO-V8-S-KCAPTCHA).
+
 1. Inference KCAPTCHA with below command
     ```
     python3 inference.py --model <checkpoint path> \
@@ -50,6 +51,7 @@ On test, Model's benchmark accuracy is 97.6%
     ```
     python3 export_to_onnx.py --input <model path>
     ```
+
 #### Quantizaion
 1. Prepare kcaptcha dataset(for best, prepare different dataset that doesn't used on training)
 2. Export Quantized model with below command
@@ -61,7 +63,24 @@ On test, Model's benchmark accuracy is 97.6%
         --calibration-dataset <calibration dataset path>
     ```
 
-### Server
+### Onnx Inference
+1. Inference KCAPTCHA with below command with onnx weight
+    ```bash
+    python3 main.py \
+        --model <onnx model path> \
+        --input <KCAPTCHA image> \
+        --c_thres 0.5 \
+        --iou_thres 0.5
+    ```
+
+
+### Server Usage
+Pretrained checkpoint available in [huggingface](https://huggingface.co/UselessNerd/YOLO-V8-S-KCAPTCHA).
+
+Only `ONNX` format weight accepted by server for performance reason.
+Quantized model(`best_int8.onnx`) is highly recommanded.
+
+### Local inference
 1. Start inference server with below command
     ```bash
     python3 main.py \
