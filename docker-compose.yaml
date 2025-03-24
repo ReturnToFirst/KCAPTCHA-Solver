@@ -8,6 +8,8 @@ services:
       - MODEL_FILE_NAME=best_int8.onnx
       - SERVER_HOST=0.0.0.0
       - SERVER_PORT=8000
+      - YOLO_CONFIDENCE_THRESHOLD=0.5
+      - YOLO_IOU_THRESHOLD=0.5
     ports:
       - "8000:8000"
     volumes:
