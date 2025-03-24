@@ -66,3 +66,23 @@ On test, Model's benchmark accuracy is 97.6%
     ```
     python3 main.py --model <onnx model path> \
     ```
+
+default exposed port is `8000`
+
+### Docker
+
+### Docker run
+```bash
+docker run -d --restart always \
+  -e MODEL_FILE_NAME=best_int8.onnx \
+  -p 8000:8000 \
+  -v ~/.model:/model \
+  ghcr.io/returntofirst/kcaptcha-solver:latest
+```
+
+deploy model file on ~/.model and run this command.
+
+#### Docker-compose
+Use [docker-compose.yaml](docker-compose.yaml) to deploy with docker-compose.
+
+deploy model file on ./model and run this command.
