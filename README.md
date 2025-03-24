@@ -15,7 +15,7 @@ Simple Numerical [KCAPTCHA](http://www.captcha.ru/en/kcaptcha/) solver using [YO
         - Recommand to generate >50K image-label set for training
     2. Split them into train, test, val set
     3. Reformat BBOX label to YOLO label format using `bbox2yolo.py`
-        ``bash
+        ```bash
         usage: bbox2yolo.py [-h] [--path PATH]
 
         options:
