@@ -10,7 +10,6 @@ from onnxruntime.quantization import CalibrationDataReader
 from onnxruntime.quantization import QuantFormat, QuantType, quantize_static
 
 
-
 class YOLODataReader(CalibrationDataReader):
     def __init__(self, calibration_image_folder: str, model_path: str):
         self.enum_data = None
@@ -39,8 +38,6 @@ class YOLODataReader(CalibrationDataReader):
     def rewind(self):
         self.enum_data = None
 
-
-
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", required=True, help="input yolov8 torch model")
@@ -58,7 +55,6 @@ def get_args():
     parser.add_argument("--per_channel", default=False, type=bool)
     args = parser.parse_args()
     return args
-
 
 
 if __name__ == "__main__":
