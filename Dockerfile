@@ -13,7 +13,7 @@ RUN mkdir -p /model
 
 ADD . /server
 WORKDIR /server
-RUN pip3 install -r requirements-server.txt
+RUN pip3 install --no-cache-dir -r requirements-server.txt
 
 EXPOSE 8000
 
